@@ -1,0 +1,76 @@
+.container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #534b52;
+}
+
+form,
+.form,
+.magicLink {
+  min-width: 20%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: stretch;
+
+  border-radius: 6px;
+  padding: 20px;
+  background-color: white;
+}
+
+form h2,
+.form h2 {
+  text-align: center;
+  margin: 0;
+}
+
+form a,
+.form a {
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  color: #534b52;
+  font-size: 0.8em;
+}
+
+input {
+  line-height: 2;
+  outline: none;
+  border: 1px solid #474448;
+  border-radius: 6px;
+  padding: 0 10px;
+}
+
+.submit {
+  margin-top: 20px;
+  background-color: #e0ddcf;
+  line-height: 2.5;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.submit:hover {
+  background-color: #f1f0ea;
+}
+
+.magicLink h2,
+.magicLink h3 {
+  text-align: center;
+  margin: 0.4em;
+}
+
+.magicLink a {
+  text-align: center;
+  font-size: 1.1em;
+  color: #534b52;
+  margin-bottom: 15px;
+}
+
+.magicLink div:last-of-type() {
+  font-size: 0.7em;
+}

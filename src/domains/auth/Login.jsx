@@ -4,6 +4,8 @@ import { useForm } from 'react-hook-form';
 import { signIn } from '../../api';
 import StorageContext from '../../storage';
 
+import styles from './auth.module.css';
+
 const Login = () => {
   const history = useHistory();
   const { token, setToken } = useContext(StorageContext);
@@ -22,13 +24,15 @@ const Login = () => {
   return !!token ? (
     <Redirect to="/dashboard" />
   ) : (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <h3>Sign In</h3>
-      <input ref={register} name="email" placeholder="Email" />
-      <input ref={register} name="password" placeholder="Password" />
-      <Link to="/reset">Reset password</Link>
-      <input type="submit" value="Sign in" />
-    </form>
+    <div className={styles.container}>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <h2>Sign In</h2>
+        <input ref={register} name="email" placeholder="Email" />
+        <input ref={register} name="password" placeholder="Password" />
+        <Link to="/reset">Reset password</Link>
+        <input className={styles.submit} type="submit" value="Sign in" />
+      </form>
+    </div>
   );
 };
 

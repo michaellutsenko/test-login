@@ -3,6 +3,8 @@ import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { activateAccount } from '../../api';
 
+import styles from './auth.module.css';
+
 const AccountActivation = () => {
   const history = useHistory();
   const { register, handleSubmit } = useForm();
@@ -27,23 +29,30 @@ const AccountActivation = () => {
   };
 
   return accountActivated ? (
-    <div>
-      <h3>This activation link is no longer valid</h3>
-      <h4>We love you nonetheless :*</h4>
+    <div className={styles.container}>
+      <h2>This activation link is no longer valid</h2>
+      <h3>We love you nonetheless :*</h3>
     </div>
   ) : (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <h3>Welcome, John Doe</h3>
-      <h4>Create a password for your new account</h4>
-      <input
-        ref={register}
-        name="email"
-        disabled={true}
-        value="john_doe@somemail.com"
-      />
-      <input ref={register} name="password" placeholder="Password" />
-      <input type="submit" value="Submit" />
-    </form>
+    <div className={styles.container}>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <h2>Welcome, John Doe</h2>
+        <h3>Create a password for your new account</h3>
+        <input
+          ref={register}
+          name="email"
+          disabled={true}
+          value="john_doe@somemail.com"
+        />
+        <input
+          ref={register}
+          type="password"
+          name="password"
+          placeholder="Password"
+        />
+        <input className={styles.submit} type="submit" value="Submit" />
+      </form>
+    </div>
   );
 };
 
