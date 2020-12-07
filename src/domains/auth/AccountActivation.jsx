@@ -40,6 +40,7 @@ const AccountActivation = () => {
         <input
           ref={register({ required: true })}
           name="email"
+          placeholder="Email"
           disabled={true}
           value="john_doe@somemail.com"
         />
@@ -50,12 +51,14 @@ const AccountActivation = () => {
           name="password"
           placeholder="Password"
         />
-        {errors.password &&
-          errors.password.type === 'required' &&
-          'Password is required'}
-        {errors.password &&
-          errors.password.type === 'minLength' &&
-          'Password must contain at least 6 symbols'}
+        {errors.password && errors.password.type === 'required' && (
+          <div className={styles.error}>Password is required</div>
+        )}
+        {errors.password && errors.password.type === 'minLength' && (
+          <div className={styles.error}>
+            Password must contain at least 6 symbols
+          </div>
+        )}
         <input className={styles.submit} type="submit" value="Submit" />
       </form>
     </div>

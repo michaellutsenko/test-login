@@ -33,17 +33,26 @@ const Login = () => {
           name="email"
           placeholder="Email"
         />
-        {errors.email && errors.email.required && 'Email is required'}
-        {errors.email && errors.email.pattern && 'Invalid email'}
+        {errors.email && errors.email.type === 'required' && (
+          <div className={styles.error}>Email is required</div>
+        )}
+        {errors.email && errors.email.type === 'pattern' && (
+          <div className={styles.error}>Invalid email</div>
+        )}
+
         <input
           ref={register({ required: true, minLength: 6 })}
           name="password"
           placeholder="Password"
         />
-        {errors.password && errors.password.required && 'Password is required'}
-        {errors.password &&
-          errors.password.minLength &&
-          'Password must contain at least 6 symbols'}
+        {errors.password && errors.password.type === 'required' && (
+          <div className={styles.error}>Password is required</div>
+        )}
+        {errors.password && errors.password.type === 'minLength' && (
+          <div className={styles.error}>
+            Password must contain at least 6 symbols
+          </div>
+        )}
         <Link to="/reset">Reset password</Link>
         <input className={styles.submit} type="submit" value="Sign in" />
       </form>

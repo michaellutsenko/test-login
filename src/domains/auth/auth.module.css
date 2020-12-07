@@ -9,7 +9,6 @@
 }
 
 form,
-.form,
 .magicLink {
   min-width: 20%;
   display: flex;
@@ -22,14 +21,12 @@ form,
   background-color: white;
 }
 
-form h2,
-.form h2 {
+form h2 {
   text-align: center;
   margin: 0;
 }
 
-form a,
-.form a {
+form a {
   text-align: center;
   text-decoration: none;
   cursor: pointer;
@@ -73,4 +70,9 @@ input {
 
 .magicLink div:last-of-type() {
   font-size: 0.7em;
+}
+
+.error {
+  font-size: 0.8em;
+  color: #93032e;
 }

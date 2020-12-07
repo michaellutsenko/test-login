@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { requestMagicLink } from '../../api';
 
 import styles from './auth.module.css';
+import { emailRegexp } from './emailRegexp';
 
 const PasswordReset = () => {
-  const [email, setEmail] = useState('');
+  const { register, handleSubmit, errors } = useForm();
   const [linkToken, setLinkToken] = useState(null);
 
-  const submitMagicLinkRequest = async () => {
+  const onSubmit = async ({ email }) => {
     try {
       const token = await requestMagicLink(email);
       setLinkToken(token);
@@ -20,20 +22,21 @@ const PasswordReset = () => {
 
   return !linkToken ? (
     <div className={styles.container}>
-      <div className={styles.form}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <h3>Password Reset</h3>
         <input
+          ref={register({ required: true, pattern: emailRegexp })}
+          name="email"
           placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
         />
-        <input
-          className={styles.submit}
-          type="button"
-          onClick={submitMagicLinkRequest}
-          value="Submit"
-        />
-      </div>
+        {errors.email && errors.email.type === 'required' && (
+          <div className={styles.error}>Email is required</div>
+        )}
+        {errors.email && errors.email.type === 'pattern' && (
+          <div className={styles.error}>Invalid email</div>
+        )}
+        <input className={styles.submit} type="submit" value="Submit" />
+      </form>
     </div>
   ) : (
     <div className={styles.container}>
