@@ -51,7 +51,7 @@ export const signOut = async () => {
   // But for simplicity's sake let's imagine the token
 
   // As the token is no longer active, resetting it in the storage
-  localStorage.setItem('token', null);
+  localStorage.setItem('token', '');
   return true;
 };
 
@@ -62,6 +62,6 @@ export const signOut = async () => {
  */
 export const requestMagicLink = async (email) => {
   // Resetting current password
-  localStorage.setItem('password', null);
+  localStorage.setItem('password', '');
   return generateRandomString();
 };

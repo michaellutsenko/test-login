@@ -1,25 +1,29 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useHistory, Redirect } from 'react-router-dom';
 import { signOut } from '../../api';
+import StorageContext from '../../storage';
 
 const Dashboard = () => {
   const history = useHistory();
-  const token = localStorage.getItem('token');
+  const { token, setToken } = useContext(StorageContext);
 
   return token ? (
     <div>
       <div>
         <span>John Doe</span>
-        <a
+        <span
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
 
-            signOut().then(() => history.push('/login'));
+            signOut().then(() => {
+              setToken(null);
+              history.push('/login');
+            });
           }}
         >
           Sign Out
-        </a>
+        </span>
       </div>
 
       <h1>Welcome, John Doe</h1>

@@ -1,22 +1,27 @@
-import React from 'react';
-import { useHistory, Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { useHistory, Link, Redirect } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { signIn } from '../../api';
+import StorageContext from '../../storage';
 
 const Login = () => {
   const history = useHistory();
+  const { token, setToken } = useContext(StorageContext);
   const { register, handleSubmit } = useForm();
 
   const onSubmit = async (formData) => {
     try {
-      await signIn(formData);
+      const response = await signIn(formData);
+      setToken(response.data.token);
       history.push('/dashboard');
     } catch {
       alert('The data you entered does not match any account');
     }
   };
 
-  return (
+  return !!token ? (
+    <Redirect to="/dashboard" />
+  ) : (
     <form onSubmit={handleSubmit(onSubmit)}>
       <h3>Sign In</h3>
       <input ref={register} name="email" placeholder="Email" />

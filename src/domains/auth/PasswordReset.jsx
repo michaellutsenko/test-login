@@ -31,7 +31,7 @@ const PasswordReset = () => {
       {/* Just kidding with trademark, don't send your lawyers after me */}
       <h3>Here is your magic link&trade;</h3>
       <h4>Use it to reset your password</h4>
-      <Link to={`/activation/${linkToken}`} />
+      <Link to={`/activation/${linkToken}`}>/activation/{linkToken}</Link>
       <div>It's also been sent to your email, so you can do it later</div>
     </div>
   );

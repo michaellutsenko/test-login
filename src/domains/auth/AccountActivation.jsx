@@ -14,6 +14,7 @@ const AccountActivation = () => {
   // render, so a useEffect could be of use here, but I'm skipping it
   // to save time.
   const accountActivated = !!localStorage.getItem('password');
+  console.log(accountActivated);
 
   const onSubmit = async (formData) => {
     try {
