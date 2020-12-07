@@ -1,16 +1,20 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { user } from '../../storage';
+import { activateUser } from '../../api';
 
 const AccountActivation = () => {
   const history = useHistory();
   const { register, handleSubmit } = useForm();
 
-  const onSubmit = ({ firstName, lastName, password }) => {
-    user.updateUserData({ firstName, lastName });
-    localStorage.setItem('password', password);
-    history.push('/login');
+  const onSubmit = async (formData) => {
+    try {
+      await activateUser(formData);
+      history.push('/login');
+    } catch {
+      // Normally, here we would've updated the UI to show the error
+      alert('Something went wrong');
+    }
   };
 
   return (
@@ -24,6 +28,7 @@ const AccountActivation = () => {
       <input ref={register} name="password" placeholder="Password" />
       <input ref={register} name="firstName" placeholder="First name" />
       <input ref={register} name="lastName" placeholder="Last name" />
+      <input type="submit" value="Submit" />
     </form>
   );
 };
