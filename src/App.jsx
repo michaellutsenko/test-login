@@ -1,7 +1,8 @@
 import React from 'react';
+import RootNavigator from './navigation/RootNavigator';
 
 const App = () => {
-  return null;
+  return <RootNavigator />;
 };
 
 export default App;
