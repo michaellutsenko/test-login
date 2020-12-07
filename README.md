@@ -1,70 +1,26 @@
-# Getting Started with Create React App
+# Test Login
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Problem description
 
-## Available Scripts
+A customer should be able to log in on the website. The customer receives a Magic Link, which leads them to the account activation page, where they can set up their initial password. The prototype should provide the following screens and corresponding logic: account activation, login, password reset and dashboard. Implementation of the server is not needed and no requests should be fired.
 
-In the project directory, you can run:
+## Launch instructions
 
-### `npm start`
+- Run `npm install` to install dependencies
+- Run `npm start` to launch the app in development mode
+- First time running the app should get you to the account activation page, emulating the hypothetical scenario where a user enters the app via a magic link
+- Use `john_doe@somemail.com` to log in
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Solution notes
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+The task poses itself very much like a technical task for a prototype app. Therefore, I approached it as I would a prototype. This means simplified logic and some workarounds. This is a UX prototype, so I focused exactly on that: correct flow and emulation of main controls and server responses.
 
-### `npm test`
+The environment is set up with `create-react-app`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Tests are written with use of `jest` and `react-testing-library`
 
-### `npm run build`
+The task did not require specific implementation details, so I decided against using Redux or MobX. The purpose of this prototype is emulation and I decided to approach it differently. For data storage I used React Context and localStorage. React Context represents hypothetical contents of the app's local store (i.e. Redux, MobX, RxJS) and localStorage represents the server's data storage. Wherever I refer to localStorage directly within the code, in a real app it would have been an API call to fetch certain data from the server.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+I only wrote tests for components within `/src/domains/auth` as it is where the bulk of the logic is. Dashboard does not have enough functionality to bother with covering it with tests and I do not have a server to test the API layer. All of the aforementioned elements could and should be tested in a real app (e.g. checking Router's history to see if redirects work correctly, checking request bodies, etc.). In testing I held to the same idea as I mentioned above: this is a UX prototype and UX is the very thing I should be testing.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+All additional notes are given in commentaries within the code. I am open to any questions and willing to explain my decisions.

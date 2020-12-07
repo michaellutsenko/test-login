@@ -22,6 +22,8 @@ const Login = () => {
     }
   };
 
+  // If a token exists, then we are still logged in and can be
+  // redirected to dashboard
   return !!token ? (
     <Redirect to="/dashboard" />
   ) : (

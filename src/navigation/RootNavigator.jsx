@@ -39,7 +39,12 @@ const RootNavigator = () => {
         {!token && <Redirect to="/login" />}
       </Route>
 
+      {/* 
+        Normally these magic links have some kind of encrypted data in them.
+        Token represents that data
+      */}
       <Route path="/activation/:token?" component={AccountActivation} />
+
       <Route path="/login" component={Login} />
       <Route path="/reset" component={PasswordReset} />
       <Route path="/dashboard" component={Dashboard} />
