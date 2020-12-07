@@ -7,7 +7,7 @@ import styles from './auth.module.css';
 
 const AccountActivation = () => {
   const history = useHistory();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, errors } = useForm();
 
   // This is not a pretty way, but the magic link can be expired
   // or we may also try to enter the activation page when the account
@@ -16,7 +16,6 @@ const AccountActivation = () => {
   // render, so a useEffect could be of use here, but I'm skipping it
   // to save time.
   const accountActivated = !!localStorage.getItem('password');
-  console.log(accountActivated);
 
   const onSubmit = async (formData) => {
     try {
@@ -39,17 +38,24 @@ const AccountActivation = () => {
         <h2>Welcome, John Doe</h2>
         <h3>Create a password for your new account</h3>
         <input
-          ref={register}
+          ref={register({ required: true })}
           name="email"
           disabled={true}
           value="john_doe@somemail.com"
         />
         <input
-          ref={register}
+          id="password"
+          ref={register({ required: true, minLength: 6 })}
           type="password"
           name="password"
           placeholder="Password"
         />
+        {errors.password &&
+          errors.password.type === 'required' &&
+          'Password is required'}
+        {errors.password &&
+          errors.password.type === 'minLength' &&
+          'Password must contain at least 6 symbols'}
         <input className={styles.submit} type="submit" value="Submit" />
       </form>
     </div>

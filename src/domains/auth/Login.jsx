@@ -4,12 +4,13 @@ import { useForm } from 'react-hook-form';
 import { signIn } from '../../api';
 import StorageContext from '../../storage';
 
+import { emailRegexp } from './emailRegexp';
 import styles from './auth.module.css';
 
 const Login = () => {
   const history = useHistory();
   const { token, setToken } = useContext(StorageContext);
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = async (formData) => {
     try {
@@ -27,8 +28,22 @@ const Login = () => {
     <div className={styles.container}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <h2>Sign In</h2>
-        <input ref={register} name="email" placeholder="Email" />
-        <input ref={register} name="password" placeholder="Password" />
+        <input
+          ref={register({ required: true, pattern: emailRegexp })}
+          name="email"
+          placeholder="Email"
+        />
+        {errors.email && errors.email.required && 'Email is required'}
+        {errors.email && errors.email.pattern && 'Invalid email'}
+        <input
+          ref={register({ required: true, minLength: 6 })}
+          name="password"
+          placeholder="Password"
+        />
+        {errors.password && errors.password.required && 'Password is required'}
+        {errors.password &&
+          errors.password.minLength &&
+          'Password must contain at least 6 symbols'}
         <Link to="/reset">Reset password</Link>
         <input className={styles.submit} type="submit" value="Sign in" />
       </form>
